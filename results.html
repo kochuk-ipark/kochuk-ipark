@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>결과조회 | 고척아이파크 공공지원민간임대</title>
+  <style>
+    :root{
+      --bg:#ffffff;
+      --text:#111;
+      --muted:#666;
+      --line:#e9e9e9;
+      --card:#fff;
+      --shadow: 0 8px 24px rgba(0,0,0,.06);
+      --radius:14px;
+
+      --btn-bg: rgba(0,0,0,.06);
+      --btn-bg-hover: rgba(0,0,0,.10);
+      --btn-border: rgba(0,0,0,.12);
+      --btn-text:#111;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.6;
+    }
+    a{color:inherit}
+    .wrap{max-width:760px;margin:0 auto;padding:18px}
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:14px 16px;border:1px solid var(--line);
+      border-radius: var(--radius); background:var(--card); box-shadow: var(--shadow);
+    }
+    .brand{display:flex;align-items:center;gap:12px;min-width:0}
+    .logo{
+      width:38px;height:38px;border-radius:12px;background:#111;color:#fff;
+      display:grid;place-items:center;font-weight:800;letter-spacing:.5px;flex:0 0 auto;
+    }
+    .brand h1{margin:0;font-size:16px;letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .brand p{margin:2px 0 0;color:var(--muted);font-size:12px}
+    .nav{display:flex;gap:8px;flex-wrap:wrap}
+    .nav a{
+      text-decoration:none;padding:9px 12px;border-radius:12px;
+      border:1px solid var(--line);background:#fff;font-size:13px;color:#111;
+    }
+    .nav a:hover{background:rgba(0,0,0,.03)}
+    .card{
+      margin-top:14px;
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background:var(--card);
+      box-shadow: var(--shadow);
+      padding:16px;
+    }
+    label{display:block;margin:12px 0 6px;font-weight:700}
+    input{
+      width:100%;padding:12px;border-radius:12px;border:1px solid var(--line);
+      font-size:15px;
+    }
+    .muted{color:var(--muted);font-size:13px;margin:6px 0 0}
+    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:12px 14px;border-radius:12px;border:1px solid var(--btn-border);
+      background: var(--btn-bg);color:var(--btn-text);text-decoration:none;font-weight:800;
+      font-size:14px;min-height:44px;cursor:pointer;
+    }
+    .btn:hover{background:var(--btn-bg-hover)}
+    .result{
+      margin-top:14px;padding:14px;border-radius:12px;border:1px solid var(--line);
+      background:#fff;
+    }
+    .ok{border-color: rgba(34,197,94,.35); background: rgba(34,197,94,.06)}
+    .no{border-color: rgba(239,68,68,.28); background: rgba(239,68,68,.05)}
+    .warn{
+      margin-top:10px;
+      border:1px solid rgba(245, 159, 0, .35);
+      background: rgba(245, 159, 0, .08);
+      padding:12px;border-radius:12px;
+      color:#3a2a00;font-size:13px;
+    }
+    .footer{margin:14px 0 8px;color:#888;font-size:12px;text-align:center}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">GC</div>
+        <div>
+          <h1>결과조회</h1>
+          <p>이름 + 생년월일(6자리)로 조회</p>
+        </div>
+      </div>
+      <div class="nav">
+        <a href="index.html">홈</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="warn">
+        <b>※ 안내</b><br>
+        주민등록번호 전체(뒷자리 포함)는 입력하지 마세요. 생년월일 6자리만 입력합니다.
+      </div>
+
+      <label>이름</label>
+      <input id="name" placeholder="예: 홍길동" />
+
+      <label>생년월일 6자리(주민등록번호 앞 6자리)</label>
+      <input id="birth6" placeholder="예: 930204" inputmode="numeric" maxlength="6" />
+
+      <p class="muted">※ 입력값은 조회를 위해 브라우저에서 해시 처리되며, 사이트에 원문으로 공개되지 않습니다.</p>
+
+      <div class="btnrow">
+        <button class="btn" id="btnCheck">결과 조회</button>
+        <a class="btn" href="index.html">홈으로</a>
+      </div>
+
+      <div id="out" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="footer">© 고척아이파크 공공지원민간임대</div>
+  </div>
+
+<script>
+  function normalizeName(v){
+    return (v || "").trim().replace(/\s+/g,""); // 공백 제거
+  }
+  function normalizeBirth6(v){
+    return (v || "").trim().replace(/\D/g,"").slice(0,6); // 숫자만 6자리
+  }
+
+  async function sha256Hex(text){
+    const enc = new TextEncoder().encode(text);
+    const buf = await crypto.subtle.digest("SHA-256", enc);
+    const arr = Array.from(new Uint8Array(buf));
+    return arr.map(b => b.toString(16).padStart(2,"0")).join("");
+  }
+
+  async function loadWinners(){
+    const res = await fetch("./winners.json", { cache: "no-store" });
+    if(!res.ok) throw new Error("winners.json을 불러오지 못했습니다.");
+    return await res.json();
+  }
+
+  function showResult(html, cls){
+    const out = document.getElementById("out");
+    out.className = "result " + (cls || "");
+    out.innerHTML = html;
+    out.style.display = "block";
+  }
+
+  document.getElementById("btnCheck").addEventListener("click", async () => {
+    const name = normalizeName(document.getElementById("name").value);
+    const birth6 = normalizeBirth6(document.getElementById("birth6").value);
+
+    if(!name) return showResult("이름을 입력해주세요.", "no");
+    if(!/^\d{6}$/.test(birth6)) return showResult("생년월일 6자리를 정확히 입력해주세요.", "no");
+
+    // 키 생성(입력값을 합쳐서 해시)
+    const key = await sha256Hex(birth6 + "|" + name);
+
+    try{
+      const data = await loadWinners();
+      const list = Array.isArray(data.winners) ? data.winners : [];
+
+      const found = list.find(x => x && x.key === key);
+      if(found){
+        const typeText = found.type ? `<br>희망타입: <b>${found.type}</b>` : "";
+        showResult(`✅ <b>조회 결과: 당첨(선정)</b>${typeText}`, "ok");
+      }else{
+        showResult("❌ <b>조회 결과: 미당첨(또는 결과 미등록)</b><br>결과 발표 후 다시 확인해주세요.", "no");
+      }
+    }catch(e){
+      showResult("오류: 결과 데이터를 불러오지 못했습니다.<br>관리자에게 문의해주세요.", "no");
+    }
+  });
+</script>
+</body>
+</html>
