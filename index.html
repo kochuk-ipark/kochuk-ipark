@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ko">
+<html lang="IPARK">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -15,7 +15,6 @@
       --shadow: 0 8px 24px rgba(0,0,0,.06);
       --radius:14px;
 
-      /* 버튼(회색 + 약간 투명 느낌) */
       --btn-bg: rgba(0,0,0,.06);
       --btn-bg-hover: rgba(0,0,0,.10);
       --btn-border: rgba(0,0,0,.12);
@@ -40,10 +39,7 @@
       background:var(--card);
       box-shadow: var(--shadow);
     }
-    .brand{
-      display:flex;align-items:center;gap:12px;
-      min-width:0;
-    }
+    .brand{display:flex;align-items:center;gap:12px;min-width:0;}
     .logo{
       width:38px;height:38px;border-radius:12px;
       background:#111;color:#fff;
@@ -118,7 +114,6 @@
     }
     .btn:hover{background:var(--btn-bg-hover)}
     .btn:active{transform: translateY(1px)}
-    .btn.small{padding:10px 12px;font-size:13px;min-height:40px}
 
     .kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
     .kpi .box{
@@ -166,10 +161,10 @@
     </section>
 
     <div class="grid">
-      <!-- 왼쪽: 접수 -->
       <section class="card">
         <h3>접수</h3>
-        <p class="muted">접수 정보: 이름 / 생년월일(6자리) / 휴대폰번호 · 희망타입: RD_64 · RD_74 · MD_64 · MD_74</p>
+        <p class="muted">접수 정보: 이름 / 생년월일(6자리) / 
+          휴대폰번호 · 희망타입: RD_64 · RD_74 · MD_64 · MD_74</p>
 
         <div class="hr"></div>
 
@@ -180,7 +175,7 @@
         </div>
 
         <div class="btnrow">
-          <a class="btn" href="PASTE_GOOGLE_FORM_LINK_HERE" target="_blank" rel="noopener">
+          <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLSfvXN72wx8Zfph0JtVObqQzXfW7203fcp-uLr0FhL2_fNi9Ug/viewform?usp=publish-editor" target="_blank" rel="noopener">
             접수하러 가기(구글폼)
           </a>
           <a class="btn" href="results.html">
@@ -204,7 +199,6 @@
         </p>
       </section>
 
-      <!-- 오른쪽: 공지/문의 -->
       <aside class="card">
         <h3>공지</h3>
         <ul>
