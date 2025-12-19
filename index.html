@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>고척아이파크 공공지원민간임대 | 안내</title>
+  <meta name="description" content="고척아이파크 공공지원민간임대 온라인 접수/추첨/결과 안내" />
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a33cc;
+      --line:#223056;
+      --text:#e9eefc;
+      --muted:#b9c4e6;
+      --accent:#7c5cff;
+      --accent2:#22c55e;
+      --warn:#fbbf24;
+      --shadow: 0 16px 40px rgba(0,0,0,.35);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Apple SD Gothic Neo", "Noto Sans KR", Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% 10%, rgba(124,92,255,.35), transparent 60%),
+        radial-gradient(900px 600px at 80% 15%, rgba(34,197,94,.18), transparent 60%),
+        radial-gradient(900px 600px at 50% 90%, rgba(59,130,246,.18), transparent 60%),
+        var(--bg);
+      line-height:1.6;
+    }
+    a{color:inherit}
+    .wrap{max-width:1000px;margin:0 auto;padding:20px}
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;
+      padding:14px 16px;border:1px solid rgba(255,255,255,.08);
+      background:rgba(15,26,51,.55);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .brand{display:flex;align-items:center;gap:10px}
+    .logo{
+      width:38px;height:38px;border-radius:12px;
+      background: linear-gradient(135deg, rgba(124,92,255,1), rgba(34,197,94,1));
+      display:grid;place-items:center;font-weight:800;color:#081027;
+      box-shadow: 0 10px 20px rgba(124,92,255,.25);
+    }
+    .brand h1{font-size:16px;margin:0}
+    .brand p{margin:0;color:var(--muted);font-size:12px}
+    .nav{display:flex;gap:8px;flex-wrap:wrap}
+    .nav a{
+      text-decoration:none;
+      padding:10px 12px;border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.18);
+      color:var(--text);
+      font-size:13px;
+    }
+    .nav a:hover{border-color:rgba(124,92,255,.6)}
+    .hero{
+      margin-top:18px;
+      padding:26px 18px;
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(15,26,51,.75), rgba(15,26,51,.35));
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";
+      position:absolute;inset:-2px;
+      background:
+        radial-gradient(600px 260px at 20% 30%, rgba(124,92,255,.35), transparent 60%),
+        radial-gradient(420px 260px at 80% 40%, rgba(34,197,94,.18), transparent 60%);
+      filter: blur(8px);
+      z-index:0;
+    }
+    .hero > *{position:relative;z-index:1}
+    .hero h2{margin:0 0 8px;font-size:26px;letter-spacing:-.3px}
+    .hero .sub{margin:0;color:var(--muted);font-size:14px}
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+    .chip{
+      font-size:12px;color:var(--muted);
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.16);
+      padding:8px 10px;border-radius:999px;
+    }
+
+    .grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px;margin-top:14px}
+    @media (max-width:900px){ .grid{grid-template-columns:1fr} }
+
+    .card{
+      border-radius: var(--radius);
+      border:1px solid rgba(255,255,255,.08);
+      background:rgba(15,26,51,.55);
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+      padding:16px;
+    }
+    .card h3{margin:0 0 8px;font-size:18px}
+    .muted{color:var(--muted);font-size:13px;margin:0}
+    .hr{height:1px;background:rgba(255,255,255,.10);margin:14px 0}
+
+    .warn{
+      border:1px solid rgba(251,191,36,.35);
+      background: rgba(251,191,36,.10);
+      padding:12px;border-radius:14px;
+      color:#fff1c2;
+      font-size:13px;
+    }
+    .warn b{color:#ffeaa0}
+
+    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;
+      padding:12px 14px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.10);
+      text-decoration:none;
+      font-weight:700;
+      font-size:14px;
+      transition:.15s transform ease, .15s border-color ease, .15s background ease;
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-1px);border-color:rgba(124,92,255,.55)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(124,92,255,1), rgba(59,130,246,1));
+      border-color: rgba(124,92,255,.35);
+    }
+    .btn.ghost{
+      background: rgba(0,0,0,.18);
+    }
+    .btn .dot{
+      width:10px;height:10px;border-radius:999px;background:rgba(255,255,255,.85)
+    }
+    .kpi{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+    .kpi .box{
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.14);
+      border-radius:14px;padding:12px;
+    }
+    .kpi .box .t{font-size:12px;color:var(--muted)}
+    .kpi .box .v{font-size:16px;font-weight:800;margin-top:4px}
+
+    ul{margin:8px 0 0;padding-left:18px}
+    li{margin:6px 0;color:var(--muted);font-size:14px}
+
+    .footer{
+      margin:16px 0 8px;
+      color:rgba(233,238,252,.65);
+      font-size:12px;
+      text-align:center;
+    }
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:8px 10px;border-radius:999px;
+      border:1px solid rgba(34,197,94,.35);
+      background: rgba(34,197,94,.10);
+      color:#c7f9d9;
+      font-size:12px;
+      margin-top:10px;
+    }
+    .badge .dot{background:rgba(34,197,94,.9)}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="logo">GC</div>
+        <div>
+          <h1>고척아이파크 공공지원민간임대</h1>
+          <p>온라인 접수 · 추첨 · 결과조회 안내</p>
+        </div>
+      </div>
+      <div class="nav">
+        <a href="index.html">홈</a>
+        <a href="results.html">결과조회</a>
+      </div>
+    </div>
+
+    <section class="hero">
+      <h2>온라인 접수 안내</h2>
+      <p class="sub">
+        본 페이지에서 접수 링크 및 주요 일정을 확인하실 수 있습니다.
+        접수는 구글폼을 통해 진행됩니다.
+      </p>
+
+      <div class="chips">
+        <div class="chip">접수 정보: 이름 / 생년월일(6자리) / 휴대폰번호</div>
+        <div class="chip">희망타입: RD_64 · RD_74 · MD_64 · MD_74</div>
+        <div class="chip">결과조회: 이름 + 생년월일(6자리) 기준</div>
+      </div>
+
+      <div class="badge"><span class="dot"></span> 현재 페이지는 무료( GitHub Pages )로 운영됩니다.</div>
+    </section>
+
+    <div class="grid">
+      <!-- 왼쪽: 접수 -->
+      <section class="card">
+        <h3>접수</h3>
+        <p class="muted">아래 버튼을 눌러 접수 페이지(구글폼)로 이동합니다.</p>
+
+        <div class="hr"></div>
+
+        <div class="warn">
+          <b>※ 중요 안내</b><br>
+          접수 정보(이름/생년월일 6자리/휴대폰번호)는 <b>실제 계약자 정보와 반드시 일치</b>해야 합니다.<br>
+          <b>접수자와 실제 계약자가 상이할 경우 계약 진행이 불가</b>하며, 당첨/선정 이후에도 취소될 수 있습니다.
+        </div>
+
+        <div class="btnrow">
+          <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLSfvXN72wx8Zfph0JtVObqQzXfW7203fcp-uLr0FhL2_fNi9Ug/viewform?usp=publish-editor" target="_blank" rel="noopener">
+            <span class="dot"></span> 접수하러 가기(구글폼)
+          </a>
+          <a class="btn ghost" href="results.html">
+            <span class="dot"></span> 결과조회
+          </a>
+        </div>
+
+        <div class="kpi">
+          <div class="box">
+            <div class="t">접수기간</div>
+            <div class="v">예: 2025-12-20 ~ 12-24</div>
+          </div>
+          <div class="box">
+            <div class="t">추첨/발표</div>
+            <div class="v">예: 12-26 (14:00/18:00)</div>
+          </div>
+        </div>
+
+        <p class="muted" style="margin-top:12px;">
+          ※ 접수 링크는 현장 운영 일정에 따라 변경될 수 있습니다.
+        </p>
+      </section>
+
+      <!-- 오른쪽: 공지/문의 -->
+      <aside class="card">
+        <h3>공지</h3>
+        <ul>
+          <li>모집공고/안내문: (필요 시 PDF 링크 추가 가능)</li>
+          <li>접수 마감 후 접수내역 수정은 불가합니다.</li>
+          <li>주민등록번호 전체(뒷자리 포함)는 수집하지 않습니다.</li>
+        </ul>
+
+        <div class="hr"></div>
+
+        <h3>문의</h3>
+        <p class="muted">
+          (여기에 현장 대표 연락처/운영시간을 입력하세요)<br>
+          예) 02-0000-0000 / 평일 09:00~18:00
+        </p>
+
+        <div class="hr"></div>
+
+        <h3>바로가기</h3>
+        <div class="btnrow">
+          <a class="btn ghost" href="results.html"><span class="dot"></span> 결과조회 바로가기</a>
+          <a class="btn ghost" href="index.html"><span class="dot"></span> 홈으로</a>
+        </div>
+      </aside>
+    </div>
+
+    <div class="footer">
+      © 고척아이파크 공공지원민간임대 · 운영 페이지(안내/접수/결과)
+    </div>
+  </div>
+</body>
+</html>
